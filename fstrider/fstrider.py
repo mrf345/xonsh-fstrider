@@ -372,10 +372,10 @@ class fstrider:
 
             try:
                 if p.is_dir():
-                    color = 'red' if 'noaccess' in access_type(p) else 'white'
+                    color = 'red' if 'noaccess' in access_type(p) else 'black'
                     dirs.append((p, HTML(f'<style fg="{color}"><b>{fd}</b></style>{msg}')))
                 else:
-                    color = 'red' if 'noaccess' in access_type(p) else '#CCCCCC'
+                    color = 'red' if 'noaccess' in access_type(p) else 'brown'
                     files.append((p, HTML(f'<style fg="{color}">{fd}</style>{msg}')))
             except:
                 files.append((p, HTML(f'<style fg="red">!EXCEPTION: {fd}</style>{msg}')))
