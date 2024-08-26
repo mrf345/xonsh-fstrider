@@ -1,15 +1,17 @@
 """Function to work with operation system (OS)."""
 
 import json
+import os
 import subprocess
 from pathlib import Path
 from xonsh.platform import ON_LINUX, ON_DARWIN
 
 def open_in_os(filename: Path, app_name: str = None):
-    if app_name:
-        return subprocess.call(('open', '-a', app_name, '-F', filename))
-    else:
-        return subprocess.call(('open', '-F', filename))
+    if filename.is_dir():
+        os.chdir(str(filename))
+        return 0
+
+    return subprocess.call(('xdg-open', filename))
 
 
 def get_os_applications():
