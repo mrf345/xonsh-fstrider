@@ -1,7 +1,7 @@
 # Maintainer: Mohamed Feddad <mrf345@gmail.com>
 
 pkgname=xonsh-fstrider-git
-pkgver=r127.3e98dce
+pkgver=r127.f086672
 pkgrel=1
 pkgdesc="fstrider is an intuitive and fast file system navigator for xonsh terminal"
 url="https://github.com/mrf345/xonsh-fstrider"
