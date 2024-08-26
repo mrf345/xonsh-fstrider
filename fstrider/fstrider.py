@@ -129,7 +129,7 @@ class fstrider:
         return style
 
     @staticmethod
-    def format_path_accent(p : Path, color='grey'):
+    def format_path_accent(p : Path, color='blue'):
         is_root = str(p) == '/'
         return f'<style fg="{color}">' + (html.escape(str(p.parent)) if str(p.parent) != '/' else '') \
                 + '/' + f'</style><style fg="{color}"><b>' + html.escape(p.name) + ('/' if p.is_dir() and not is_root else '') + '</b></style>'
@@ -142,14 +142,14 @@ class fstrider:
             if not msg:
                 msg = 'Access denied'  # FEAT: add chown/chmod
         elif 'notexist' in at:
-            color = 'grey'
+            color = 'blue'
         else:
-            color = 'orange'
+            color = 'green'
 
         txt = self.format_path_accent(p, color)
 
         if msg:
-            txt += f'<style fg="grey"> - {html.escape(msg)}</style>'
+            txt += f'<style fg="blue"> - {html.escape(msg)}</style>'
 
         self.title.text = HTML(txt)
 
@@ -270,6 +270,7 @@ class fstrider:
         def _key_copy_path(event):
             self.copy_path_clp(self.current_path)
 
+        @radio_list.control.key_bindings.add("c-x")
         @radio_list.control.key_bindings.add("c-q")
         def _key_exit(event):
             event.app.exit()
@@ -356,7 +357,7 @@ class fstrider:
             }
 
         def render_msg(m):
-            return f'<style fg="grey"> - {m}</style>'
+            return f'<style fg="blue"> - {m}</style>'
 
         for p in pwd.glob('*'):
             fd = html.escape(p.name)
@@ -383,7 +384,7 @@ class fstrider:
 
         history_index = 0
         if not values:
-            values = [(pwd, HTML(f'<style fg="grey"><b>.</b></style>'))]
+            values = [(pwd, HTML(f'<style fg="blue"><b>.</b></style>'))]
         else:
             # FEAT: optimize
             hist_path = None
@@ -487,7 +488,7 @@ class fstrider:
                 'Create this directory': self.do_create_this_dir
             }
 
-        color = 'red' if 'noaccess' in access_type(filepath) else 'grey'
+        color = 'red' if 'noaccess' in access_type(filepath) else 'blue'
 
         return [(func, HTML(f'<style fg="{color}">{name}</style>')) for name, func in funcs.items()]
 
